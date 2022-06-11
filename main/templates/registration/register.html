@@ -1,0 +1,78 @@
+{% extends 'registration/base.html' %}
+{% block content %}
+
+    <div class="card mb-3">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a class ="font-weight-bolder" style="margin-right: 30px;" href={% url 'setting' %}  >색인설정</a>
+            <a class ="font-weight-bolder" style="margin-right: 30px;" href={% url 'sellersetting' %} >셀러설정</a>
+            <a class ="font-weight-bolder" href={% url 'register' %} >사용자관리</a>
+          </li>
+        </ol>
+        <div class="card-header">사용자 관리</div>
+          <div class="card-body">
+            <div class="table-responsive">
+                <form method="post" action={% url 'register' %}>
+                    {% csrf_token %}
+                    <table class="type05" id="dataTable">
+                    <tbody>
+                    <tr>
+                        <th scope="row">아이디</th>
+                        <td>{{ form.username }}  영문,숫자만 사용할 수 있습니다.</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">비밀번호</th>
+                        <td>{{ form.password }}  영문,숫자,특수문자를 사용할 수 있습니다.</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">이름</th>
+                        <td>{{ form.first_name }}</td>
+                    </tr>
+                    </tbody>
+                    </table>
+        <div class="button" style="margin: auto; float: left;">
+            <input style="margin-left:10px" type="submit" name="create" value="등록"/>
+        </div>
+        <div class="button" style="margin: auto; float:left;">
+            <input style="margin-left:2px" type="submit" name="update" value="수정"/>
+        </div>
+        <div class="button" style="margin: auto; float:left;">
+            <input style="margin-left:2px" type="submit" name="delete" value="삭제"/>
+        </div>
+                </form>
+
+            </div>
+
+        <div class="table-responsive">
+            <table class="type04">
+                <thead>
+                <th>사용자유형</th>
+                <th>사용자명</th>
+                <th>아이디</th>
+                <th>등록일</th>
+                </thead>
+                <tbody>
+                    {% for u in User %}
+                            <tr>
+                            {% if u.is_staff %}
+                                <td>admin</td>
+                            {% else %}
+                                <td>User</td>
+                            {% endif %}
+                            <td>{{u.first_name}}</td>
+                            <td>{{u.username}}</td>
+                            <td>{{u.date_joined}}</td>
+                            </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+{% endblock %}

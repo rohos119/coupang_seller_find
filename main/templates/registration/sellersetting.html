@@ -1,0 +1,72 @@
+{% extends 'registration/base.html' %}
+{% block content %}
+
+    <div class="card mb-3">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a class ="font-weight-bolder" style="margin-right: 30px;" href={% url 'setting' %} >색인설정</a>
+            <a class ="font-weight-bolder" style="margin-right: 30px;" href={% url 'sellersetting' %} >셀러설정</a>
+            <a class ="font-weight-bolder" href={% url 'register' %} >사용자관리</a>
+          </li>
+        </ol>
+        <div class="card-header">자사셀러 등록</div>
+          <div class="card-body">
+            <div class="table-responsive">
+                <form method="post" action=" ">
+                    {% csrf_token %}
+
+                    <table class="type05" id="dataTable">
+                    <tbody>
+                    <tr>
+                        <th scope="row">셀러명</th>
+                        <td>{{ form.sellername }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">셀러코드</th>
+                        <td>{{ form.sellercode }}
+                            {{ form.sellertype}}
+                            <div class="button" style="margin-left: 20px; float: right;">
+                                <input style="margin-left:10px" type="submit" value="등록"/>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                    </table>
+                </form>
+            </div>
+        <div class="table-responsive2">
+            <button id="deletebtn" style="margin-left:10px">삭제</button>
+            <button id="selectall" style="margin-left:10px">전체선택</button>
+            <table class="type04">
+                <thead>
+                <th>셀러유형</th>
+                <th>선택</th>
+                <th>셀러명</th>
+                <th>셀러코드</th>
+                <th>등록일</th>
+                </thead>
+                <tbody>
+                    {% for s in seller %}
+                            <tr>
+                            <td>{% if s.sellertype == "2" %}자사셀러{% endif %}
+                                {% if s.sellertype == "1" %}매칭샐러{% endif %}
+                                {% if s.sellertype == "3" %}제휴셀러{% endif %}
+                            </td>
+                            <td><input type="checkbox" class="user_CheckBox" value={{ s.id }}></td>
+                            <td>{{s.sellername}}</td>
+                            <td>
+                                {{s.sellercode}}
+                            </td>
+                            <td>{{s.update}}</td>
+                            </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+    {% load static %}
+  <script src="{% static 'vendor/datatables/dataTables-sellersetting.js' %}"></script>
+{% endblock %}

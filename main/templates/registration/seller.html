@@ -1,0 +1,90 @@
+{% extends 'registration/base.html' %}
+{% block content %}
+
+    <div class="card mb-3">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a class ="font-weight-bolder" style="margin-right: 30px;" href={% url 'setting' %} >색인설정</a>
+            <a class ="font-weight-bolder" style="margin-right: 30px;" href={% url 'sellersetting' %} >셀러설정</a>
+            <a class ="font-weight-bolder" href={% url 'register' %} >사용자관리</a>
+          </li>
+        </ol>
+        <ul style="padding-left: 20px;">
+            <a style="margin-right: 10px; font-size: small" href={% url 'product' %}>상품색인  |</a>
+            <a style="margin-right: 10px; font-size: small" href={% url 'seller' %}>셀러색인  |</a>
+            <a style="margin-right: 10px; font-size: small" href={% url 'category' %}>카테고리색인</a>
+        </ul>
+        <div class="card-header" style="font-size: small">셀러색인</div>
+          <div class="card-body">
+            <div class="table-responsive">
+                <form method="post" action=" ">
+                    {% csrf_token %}
+                    <table class="type06" id="dataTable">
+                    <tbody>
+                    <tr>
+                        <th scope="row">색인상태</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">다음예정색인</th>
+                        <td>
+                            <div class="button" style="margin-left: 20px; float: right;">
+                                <input style="margin-left:10px" type="submit" value="등록"/>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">색인수동실행</th>
+                        <td>
+                            <div class="button" style="float: left;">
+                                <input type="submit" value="수동으로 실행"/>
+                                 <a style="margin-left:10px; font-size: 0.8rem">색인예정 1시간전 또는 진행중인 색인이 있는 경우 사용할 수 없습니다. </a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">자동색인주기</th>
+                        <td>
+                            <div style="display: inline-block">
+                                <input type="checkbox" value="등록"/> 사용안함
+                                <input style="margin-left:50px" type="checkbox" value="1"/> 매일1회
+                                <input style="margin-left:50px" type="checkbox" value="2"/> 매일2회
+                                <input style="margin-left:50px" type="checkbox" value="3"/> 매일3회
+                            </div>
+                            <div class="button" style="margin-left: 20px; display: inline-block; float: right;" disabled>
+                                <input style="margin-left:10px; font-size: 0.8rem;" type="submit" value="색인주기변경"/>
+                            </div>
+                            <div style="margin-top: 30px">
+                            <a style="font-size: 0.8rem">매일1회 : 05시 실행, 매일2회 : 05시,17시 실행, 매일3회 : 05시, 13시, 21시 실행</a><br>
+                            <a style="font-size: 0.8rem">색인주기 변경은 다음날 까지 적용됩니다</a><br>
+                            <a style="font-size: 0.8rem">다음색인 시간까지 진행중인 색인이 완료되지 않으면, 예정색인은 예정시각에 자동스킵됩니다.</a><br>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">타겟화면</th>
+                        <td>셀러DB(판매자스토어+상품상세), 매칭셀러(판매자스토어+상품상세)</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" rowspan="3">색인규칙</th>
+                        <td>판매자스토어 랭킹순 10000개 상품</td>
+                    </tr>
+                    <tr><td>매칭 셀러가 없는 셀러DB상품 - 종료 및 다음상품 조회</td></tr>
+                    <tr><td>매칭 셀러가 있는 셀러DB상품 - 매칭셀러의 셀러정보 수집</td></tr>
+                    <tr>
+                        <th scope="row">수집데이터</th>
+                        <td>매칭셀러정보 : 판매자명, 판매자스토어(업체코드), 판매성공수, 판매상품수, 판매자연락처</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">업데이트DB</th>
+                        <td>셀러DB</td>
+                    </tr>
+                    </tbody>
+                    </table>
+                </form>
+            </div>
+
+      </div>
+    </div>
+  </div>
+{% endblock %}

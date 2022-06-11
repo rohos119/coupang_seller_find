@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Nettonet</title>
+  {% load static %}
+  <!-- Custom fonts for this template-->
+  <link href="{%  static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+  <!-- Custom styles for this template-->
+  <link href="{%  static 'css/sb-admin.css' %}" rel="stylesheet">
+    <link href="{%  static 'css/main.css' %}" rel="stylesheet">
+</head>
+<body class="bg-dark">
+  <div class="container-login100">
+    <div class="card card-login" style="border-radius: 10px; width:500px;">
+      <div class="card-body" style="padding-top: 50px; border-radius: 10px;">
+          <p class="login100-form-title" style="padding-bottom: 50px; padding-left: 15px;"> Seller Item Finder</p>
+          <form method="post" action={% url 'login' %}>
+              {% csrf_token %}
+            <div class="form-group">
+                <div class="form-label-group">
+                    <input type="text" id="username" name="username" class="form-control" placeholder="ID" required="required" autofocus="autofocus">
+{#                    {{ form.username }}#}
+                    <label for="username">ID</label>
+                </div>
+          </div>
+          <div class="form-group">
+              <div class="form-label-group">
+{#                  {{ form.password }}#}
+                  <input type="password" id="password" name="password" class="form-control" placeholder="ID" required="required" autofocus="autofocus">
+                  <label for="password">Password</label>
+              </div>
+          </div>
+          <div class="form-group">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" value="remember-me">
+                아이디 자동입력
+              </label>
+            </div>
+          </div>
+          <input type="submit" value="로그인" class="btn btn-primary btn-block" style="background-color: #254363;border-color: #ebebeb; border-radius: 40px;"></input>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="{%  static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{%  static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="{%  static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+  <script src="{%  static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+  <script src="{%  static 'vendor/animsition/js/animsition.min.js' %}"></script>
+  <script src="{%  static 'vendor/bootstrap/js/popper.js' %}"></script>
+  <script src="{%  static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+  <script src="{%  static 'vendor/select2/select2.min.js' %}"></script>
+  <script src="{%  static 'vendor/daterangepicker/moment.min.js' %}"></script>
+  <script src="{%  static 'vendor/daterangepicker/daterangepicker.js' %}"></script>
+  <script src="{%  static 'vendor/countdowntime/countdowntime.js' %}"></script>
+  <script src="{%  static 'js/main.js' %}"></script>
+</body>
+
+</html>

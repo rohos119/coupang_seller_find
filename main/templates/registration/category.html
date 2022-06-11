@@ -1,0 +1,169 @@
+{% extends 'registration/base.html' %}
+{% block content %}
+
+    <div class="card mb-3">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a class ="font-weight-bolder" style="margin-right: 30px;" href={% url 'setting' %} >색인설정</a>
+            <a class ="font-weight-bolder" style="margin-right: 30px;" href={% url 'sellersetting' %} >셀러설정</a>
+            <a class ="font-weight-bolder" href={% url 'register' %} >사용자관리</a>
+          </li>
+        </ol>
+        <ul style="padding-left: 20px;">
+            <a style="margin-right: 10px; font-size: small" href={% url 'product' %}>상품색인  |</a>
+            <a style="margin-right: 10px; font-size: small" href={% url 'seller' %}>셀러색인  |</a>
+            <a style="margin-right: 10px; font-size: small" href={% url 'category' %}>카테고리색인</a>
+        </ul>
+        <div class="card-header" style="font-size: small;">카테고리색인 기본설정</div>
+          <div class="card-body">
+            <div class="table-responsive">
+                <form method="post" action=" ">
+                    {% csrf_token %}
+                    <table class="type06" id="dataTable">
+                    <tbody>
+                    <tr>
+                        <th scope="row">색인상태</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">다음예정색인</th>
+                        <td>
+                            내일(현재date값 +1, 시간은 05:00:00 고정)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">색인수동실행</th>
+                        <td>
+                            <div class="button" style="float: left;">
+                                <input type="submit" value="수동으로 실행"/>
+                                 <a style="margin-left:10px; font-size: 0.8rem">색인예정 1시간전 또는 진행중인 색인이 있는 경우 사용할 수 없습니다. </a>
+                            </div>
+                        </td>
+                    </tr>
+                      <tr>
+                        <th scope="row" rowspan="2">자동색인주기</th>
+                        <td>
+                            <div style="display: inline-block">
+                                <input type="checkbox" value="등록"/> 사용안함
+                                <input style="margin-left:50px" type="checkbox" name="crawlperiod" value="1"/> 매일1회
+                                <input style="margin-left:50px" type="checkbox" name="crawlperiod" value="2"/> 매일2회
+                                <input style="margin-left:50px" type="checkbox" name="crawlperiod" value="3"/> 매일3회
+                            </div>
+                            <div class="button" style="margin-left: 20px; display: inline-block; float: right;" disabled>
+                                <input style="margin-left:10px; font-size: 0.8rem;" type="submit" value="색인주기변경"/>
+                            </div>
+                            <div style="margin-top: 30px">
+                            <a style="font-size: 0.8rem">매일1회 : 05시 실행, 매일2회 : 05시,17시 실행, 매일3회 : 05시, 13시, 21시 실행</a><br>
+                            <a style="font-size: 0.8rem">색인주기 변경은 다음날 까지 적용됩니다</a><br>
+                            <a style="font-size: 0.8rem">다음색인 시간까지 진행중인 색인이 완료되지 않으면, 예정색인은 예정시각에 자동스킵됩니다.</a><br>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr><td>자동색인주기 최근업데이트 : ( 최신 업데이트 값 ) </td></tr>
+                    <tr>
+                        <th scope="row">타겟화면</th>
+                        <td>카테고리상품리스트, 상품상세</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" rowspan="9">색인규칙</th>
+                        <td style="background-color: #efefef">색인규칙 최근업데이트 : (setting에 카테고리 updatedate)</td>
+                    </tr>
+                    <tr><td style="background-color: #efefef">카테고리 상품리스트 색인 조건 설정(색인규칙 변경은 다음날 적용됩니다.)</td></tr>
+                    <tr>
+                        <td>
+                            <div style="width: fit-content; border-left: #95999c; display: inline-block;">①상품리스트 정렬방식</div>
+                           <div style="display: inline-block">
+                                <input style="margin-left:50px" type="checkbox" name="sorter" value="랭킹순"/> 랭킹순
+                                <input style="margin-left:50px" type="checkbox" name="sorter" value="판매량순"/> 판매량순
+                                <input style="margin-left:50px" type="checkbox" name="sorter" value="latestAsc"/> 최신순
+                            </div>
+                            <div class="button" style="margin-left: 20px; display: inline-block; float: right;" disabled>
+                                <input style="margin-left:10px; font-size: 0.8rem;" type="submit" value="정렬방식변경"/>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="width: fit-content; border-left: #95999c; display: inline-block;">②상품리스트 필터사용</div>
+                           <div style="display: inline-block">
+                                <input style="margin-left:50px" type="checkbox" name="rating" value="0"/> 사용안함
+                                <input style="margin-left:10px" type="checkbox" name="rating"  value="1"/> 별점1개이상
+                                <input style="margin-left:10px" type="checkbox" name="rating"  value="2"/> 별점2개이상
+                               <input style="margin-left:10px" type="checkbox" name="rating"  value="3"/> 별점3개이상
+                               <input style="margin-left:10px" type="checkbox" name="rating"  value="4"/> 별점4개이상
+                            </div>
+                            <div class="button" style="margin-left: 20px; display: inline-block; float: right;" disabled>
+                                <input style="margin-left:10px; font-size: 0.8rem;" type="submit" value="필터정렬변경"/>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="width: fit-content; border-left: #95999c; display: inline-block;">③상품리스트 배송예정일</div>
+                           <div style="display: inline-block">
+                               <span style="margin-left:30px" >현재일 + </span>
+                                <input type="number" name="delivery" value=" "/> 일 이상
+                            </div>
+                            <div class="button" style="margin-left: 20px; display: inline-block; float: right;" disabled>
+                                <input style="margin-left:10px; font-size: 0.8rem;" type="submit" value="배송예정변경"/>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="width: fit-content; border-left: #95999c; display: inline-block;">④상품리스트 타겟상품수</div>
+                           <div style="display: inline-block">
+                                <input style="margin-left:30px" type="number" name="target"/> 개 이상
+                            </div>
+                            <div class="button" style="margin-left: 20px; display: inline-block; float: right;" disabled>
+                                <input style="margin-left:10px; font-size: 0.8rem;" type="submit" value="타겟상품변경"/>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr><td style="background-color: #efefef">상품상세 색인 조건 설정(색인규칙 변경은 다음날 적용됩니다.)</td></tr>
+                    <tr>
+                        <td>
+                            <div style="width: fit-content; border-left: #95999c; display: inline-block;">상품상세 배송방법</div>
+                            <div style="display: inline-block">
+{#                                수정부분#}
+                            <input style="margin-left:30px" type="checkbox" name="deli_method[ ]" value="주문제작"/> 주문제작
+                            <input style="margin-left:50px" type="checkbox" name="deli_method[ ]" value="순차배송"/> 순차배송
+                            <input style="margin-left:50px" type="checkbox" name="deli_method[ ]" value="해외직구"/> 해외직구
+                            </div>
+                            <div class="button" style="margin-left: 20px; display: inline-block; float: right;" disabled>
+                                <input style="margin-left:10px; font-size: 0.8rem;" type="submit" value="배송방법변경"/>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="width: fit-content; border-left: #95999c; display: inline-block;">상품상세 교환방법</div>
+                            <div style="display: inline-block">
+                            <input style="margin-left:30px" type="number" name="del_cost" value="왕봉배송비용"/> 원 이상
+                            </div>
+                            <div class="button" style="margin-left: 20px; display: inline-block; float: right;" disabled>
+                                <input style="margin-left:10px; font-size: 0.8rem;" type="submit" value="왕복비용변경"/>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">수집데이터</th>
+                        <td>매칭셀러정보 : 판매자명, 판매자스토어(업체코드), 판매성공수, 판매상품수, 판매자연락처</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">업데이트DB</th>
+                        <td>셀러DB</td>
+                    </tr>
+                    </tbody>
+                    </table>
+                </form>
+            </div>
+        <div class="table-responsive">
+            <table class="type04">
+            </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+{% endblock %}
