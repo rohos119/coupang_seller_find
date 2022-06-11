@@ -80,8 +80,8 @@ DATABASES = {
         'ENGINE': 'djongo',
         'NAME': 'coupang',
         'HOST': 'mongodb+srv://beom:beom@coupangtest-ribq2.mongodb.net/test',
-        'USER': 'beom',
-        'PASSWORD': 'beom',
+#         'USER': '',
+#         'PASSWORD': '',
     }
 }
 
