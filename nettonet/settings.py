@@ -20,7 +20,7 @@ LOGIN_URL = '/login/'
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '2k=reedpic$k^uv+tkq1_s59j9!9o%_uu^s1(tvgxsz&s++q^4'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -80,8 +80,8 @@ DATABASES = {
         'ENGINE': 'djongo',
         'NAME': 'coupang',
         'HOST': 'mongodb+srv://beom:beom@coupangtest-ribq2.mongodb.net/test',
-        'USER': 'beom',
-        'PASSWORD': 'beom',
+#         'USER': '',
+#         'PASSWORD': '',
     }
 }
 
