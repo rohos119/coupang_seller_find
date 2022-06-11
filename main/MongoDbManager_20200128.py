@@ -3,7 +3,7 @@ import datetime
 
 class MongoDbManager :
     _instance = None
-    client = pymongo.MongoClient('mongodb+srv://admin:admin@coupangtest-ribq2.mongodb.net/test?retryWrites=true&w=majority')
+    client = pymongo.MongoClient('mongodb+srv://userid:pwd@coupangtest-ribq2.mongodb.net/test?retryWrites=true&w=majority')
     database = client['coupang']
 
     def __new__(cls, *args, **kwargs):
